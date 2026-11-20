@@ -1,0 +1,21 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: slots-service
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5433/slots}
+    username: ${SPRING_DATASOURCE_USERNAME:casino}
+    password: ${SPRING_DATASOURCE_PASSWORD:casino}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+
+banking:
+  base-url: ${BANKING_BASE_URL:http://localhost:8080/casino/bank/api}
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html

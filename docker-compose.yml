@@ -1,0 +1,64 @@
+services:
+
+  banking-db:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: banking
+      POSTGRES_USER: casino
+      POSTGRES_PASSWORD: casino
+    ports:
+      - "5432:5432"
+    volumes:
+      - banking-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U casino -d banking"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  slots-db:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: slots
+      POSTGRES_USER: casino
+      POSTGRES_PASSWORD: casino
+    ports:
+      - "5433:5432"
+    volumes:
+      - slots-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U casino -d slots"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  banking-service:
+    build: ./banking-service
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://banking-db:5432/banking
+      SPRING_DATASOURCE_USERNAME: casino
+      SPRING_DATASOURCE_PASSWORD: casino
+    depends_on:
+      banking-db:
+        condition: service_healthy
+
+  slots-service:
+    build: ./slots-service
+    ports:
+      - "8081:8081"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://slots-db:5432/slots
+      SPRING_DATASOURCE_USERNAME: casino
+      SPRING_DATASOURCE_PASSWORD: casino
+      BANKING_BASE_URL: http://banking-service:8080/casino/bank/api
+    depends_on:
+      slots-db:
+        condition: service_healthy
+      banking-service:
+        condition: service_started
+
+volumes:
+  banking-data:
+  slots-data:
