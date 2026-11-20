@@ -39,8 +39,7 @@ Stoppen: `docker compose down` (mit `-v` werden auch die Datenbanken gelöscht).
 ## Autoren
 
 - Muhammad Reza Aulia Rahman
-- _weitere Gruppenmitglieder_
+- 
 
 ## Lizenz
 
-_optional: Creative-Commons-Lizenz eintragen_
