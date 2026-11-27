@@ -33,6 +33,9 @@ docker compose up --build
 
 - Banking Swagger UI: http://localhost:8080/swagger-ui.html
 - Slots Swagger UI: http://localhost:8081/swagger-ui.html
+- API-Dokumentation: [docs/API-DOCUMENTATION.md](docs/API-DOCUMENTATION.md)
+- Banking OpenAPI: [docs/openapi/banking-service.yml](docs/openapi/banking-service.yml)
+- Slots OpenAPI: [docs/openapi/slots-service.yml](docs/openapi/slots-service.yml)
 
 Stoppen: `docker compose down` (mit `-v` werden auch die Datenbanken gelöscht).
 
@@ -42,4 +45,3 @@ Stoppen: `docker compose down` (mit `-v` werden auch die Datenbanken gelöscht).
 - 
 
 ## Lizenz
-

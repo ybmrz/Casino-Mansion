@@ -1,0 +1,31 @@
+openapi: 3.1.0
+info:
+  title: Casino-Mansion Slots Service API
+  version: 0.0.1
+  description: >
+    API-Basis des Slots-Services. Es sind noch keine REST-Controller implementiert.
+    Die Datei wird bei der Implementierung um konkrete Pfade erweitert.
+servers:
+  - url: http://localhost:8081/casino/slots/api
+    description: Lokale Docker-Compose-Umgebung
+tags:
+  - name: Slots
+    description: Geplanter Bereich für Slot-Spiele
+paths: {}
+components:
+  schemas:
+    Problem:
+      type: object
+      description: Empfohlenes Fehlerformat; noch nicht durch einen Exception-Handler implementiert.
+      properties:
+        type:
+          type: string
+          format: uri
+        title:
+          type: string
+        status:
+          type: integer
+        detail:
+          type: string
+        instance:
+          type: string
